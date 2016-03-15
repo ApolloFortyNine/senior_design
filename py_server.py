@@ -24,16 +24,22 @@ def main():
 
     # TODO: Wrap everything in a try catch, so it doesn't crash when an improper resquest is sent
     while True:
-        client, address = server_socket.accept()
-        data = client.recv(1024)
-        if data:
-            test_str = str(data, 'utf-8')
-            if test_str[0] != '{' or test_str[end] != '}':
-                logger.warning("Received invalid data")
-            logger.debug("Received data: {0}".format(str(test_str)))
-            data_dict = json.loads(test_str)
-            logger.info("Received valid data, sending to database")
-        client.close()
+        try:
+            client, address = server_socket.accept()
+            data = client.recv(1024)
+            if data:
+                test_str = str(data, 'utf-8')
+                if test_str[0] != '{' or test_str[end] != '}':
+                    logger.warning("Received invalid data: {0}".format(test_str))
+                    client.close()
+                    continue
+                logger.debug("Received data: {0}".format(test_str))
+                data_dict = json.loads(test_str)
+                logger.info("Received valid data, sending to database")
+                fill_db(data_dict)
+            client.close()
+        except:
+            logger.exception("Invalid data caused exception:")
 
 
 def fill_db(data_dict):
