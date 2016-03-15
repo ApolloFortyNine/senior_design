@@ -1,4 +1,4 @@
 # t=thumb, i=index, m=middle, r=ring, p=pinky, imu=imu
 # _f=flex, _cu=upper capacitive sensor, _cl=lower capacitive sensor, _co=other capcitive sensor
 # _aX=accelerometer X, _gX=gyroscope X
-"{"t_f": 1.5062, "i_f": 1.7029, "m_f": 1.2012, "r_f": 1.809, "p_f": 1.221, "t_c": 1, "i_cu": 0, "i_cl": 0, "i_co": 1, "m_cu": 0, "m_cl": 0, "r_cu": 0, "r_cl": 0, "p_cu": 0, "p_cl": 0, "imu_ax": 0.1235, "imu_ay": 0.354, "imu_az": 0.561, "imu_gx": 0.0123, "imu_gy": 0.365, "imu_gz": 0.891}"
+'{"t_f": 1.5062, "i_f": 1.7029, "m_f": 1.2012, "r_f": 1.809, "p_f": 1.221, "t_c": 1, "i_cu": 0, "i_cl": 0, "i_co": 1, "m_cu": 0, "m_cl": 0, "r_cu": 0, "r_cl": 0, "p_cu": 0, "p_cl": 0, "imu_ax": 0.1235, "imu_ay": 0.354, "imu_az": 0.561, "imu_gx": 0.0123, "imu_gy": 0.365, "imu_gz": 0.891}'

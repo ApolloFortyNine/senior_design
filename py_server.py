@@ -29,7 +29,7 @@ def main():
             data = client.recv(1024)
             if data:
                 test_str = str(data, 'utf-8')
-                if test_str[0] != '{' or test_str[end] != '}':
+                if test_str[0] != '{' or test_str[-1] != '}':
                     logger.warning("Received invalid data: {0}".format(test_str))
                     client.close()
                     continue
@@ -40,6 +40,7 @@ def main():
             client.close()
         except:
             logger.exception("Invalid data caused exception:")
+            client.close()
 
 
 def fill_db(data_dict):
@@ -90,4 +91,5 @@ def test_data():
     fill_db(data_dict)
 
 # Run the code
-test_data()
+#test_data()
+main()
