@@ -14,6 +14,7 @@ handler.setFormatter(log_formatter)
 logger.addHandler(handler)
 
 
+# Send 1 json object containing first 10 keys, then another with the rest in another packet
 def main():
     # Socket creation
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -21,7 +22,8 @@ def main():
     server_socket.bind((socket.gethostname(), port))
     server_socket.listen(5)
     logger.info("Successfully started listening on port {0}".format(port))
-
+    data_dict_1 = {}
+    data_dict_2 = {}
     # TODO: Wrap everything in a try catch, so it doesn't crash when an improper resquest is sent
     while True:
         try:
@@ -34,12 +36,22 @@ def main():
                     client.close()
                     continue
                 logger.debug("Received data: {0}".format(test_str))
-                data_dict = json.loads(test_str)
+                if not data_dict_1:
+                    data_dict_1 = json.loads(test_str)
+                    logger.info("Filled first data_dict")
+                    continue
+                data_dict_2 = json.loads(test_str)
+                logger.info("Filled second data_dict")
+                data_dict_2.update(data_dict_1)
                 logger.info("Received valid data, sending to database")
-                fill_db(data_dict)
+                fill_db(data_dict_2)
+                data_dict_1 = {}
+                data_dict_2 = {}
             client.close()
         except:
             logger.exception("Invalid data caused exception:")
+            data_dict_1 = {}
+            data_dict_2 = {}
             client.close()
 
 
