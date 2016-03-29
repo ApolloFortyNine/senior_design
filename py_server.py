@@ -24,6 +24,7 @@ def main():
     logger.info("Successfully started listening on port {0}".format(port))
     data_dict_1 = {}
     data_dict_2 = {}
+    filled_time = 0
     # TODO: Wrap everything in a try catch, so it doesn't crash when an improper resquest is sent
     while True:
         try:
@@ -36,8 +37,9 @@ def main():
                     client.close()
                     continue
                 logger.debug("Received data: {0}".format(test_str))
-                if not data_dict_1:
+                if not data_dict_1 or ((time.time() - filled_time) >= 5):
                     data_dict_1 = json.loads(test_str)
+                    filled_time = time.time()
                     logger.info("Filled first data_dict")
                     continue
                 data_dict_2 = json.loads(test_str)
