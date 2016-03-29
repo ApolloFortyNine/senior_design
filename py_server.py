@@ -54,6 +54,7 @@ def main():
             logger.exception("Invalid data caused exception:")
             data_dict_1 = {}
             data_dict_2 = {}
+            filled = 0
             client.close()
 
 
