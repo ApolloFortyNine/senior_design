@@ -14,7 +14,6 @@ handler.setFormatter(log_formatter)
 logger.addHandler(handler)
 
 
-# Send 1 json object containing first 10 keys, then another with the rest in another packet
 def main():
     # Socket creation
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,7 +21,6 @@ def main():
     server_socket.bind((socket.gethostname(), port))
     server_socket.listen(5)
     logger.info("Successfully started listening on port {0}".format(port))
-    # TODO: Wrap everything in a try catch, so it doesn't crash when an improper resquest is sent
     while True:
         try:
             client, address = server_socket.accept()
