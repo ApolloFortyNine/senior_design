@@ -22,9 +22,6 @@ def main():
     server_socket.bind((socket.gethostname(), port))
     server_socket.listen(5)
     logger.info("Successfully started listening on port {0}".format(port))
-    data_dict_1 = {}
-    data_dict_2 = {}
-    filled_time = 0
     # TODO: Wrap everything in a try catch, so it doesn't crash when an improper resquest is sent
     while True:
         try:
@@ -37,31 +34,45 @@ def main():
                     client.close()
                     continue
                 logger.debug("Received data: {0}".format(test_str))
-                if not data_dict_1 or ((time.time() - filled_time) >= 5):
-                    data_dict_1 = json.loads(test_str)
-                    filled_time = time.time()
-                    logger.info("Filled first data_dict")
-                    continue
-                data_dict_2 = json.loads(test_str)
-                logger.info("Filled second data_dict")
-                data_dict_2.update(data_dict_1)
+                data_dict = json.loads(test_str)
                 logger.info("Received valid data, sending to database")
-                fill_db(data_dict_2)
-                data_dict_1 = {}
-                data_dict_2 = {}
+                fill_db(data_dict)
             client.close()
         except:
             logger.exception("Invalid data caused exception:")
-            data_dict_1 = {}
-            data_dict_2 = {}
-            filled = 0
             client.close()
 
 
-def fill_db(data_dict):
+def fill_db(data_dict_in):
     conn = sqlite3.connect('glove.db3')
     c = conn.cursor()
-
+    data_dict = {}
+    data = data_dict_in['data']
+    # Order:
+    # t_c, i_cu, i_cl, i_co, m_cu, m_cl, r_cu, r_cl, p_cu,
+    # p_cl, t_f, i_f, m_f, r_f, p_f, imu_gx, imu_gy, imu_gz, imu_ax, imu_ay,
+    # imu_az);
+    data_dict['t_c'] = data[0]
+    data_dict['i_cu'] = data[1]
+    data_dict['i_cl'] = data[2]
+    data_dict['i_co'] = data[3]
+    data_dict['m_cu'] = data[4]
+    data_dict['m_cl'] = data[5]
+    data_dict['r_cu'] = data[6]
+    data_dict['r_cl'] = data[7]
+    data_dict['p_cu'] = data[8]
+    data_dict['p_cl'] = data[9]
+    data_dict['t_f'] = data[10]
+    data_dict['i_f'] = data[11]
+    data_dict['m_f'] = data[12]
+    data_dict['r_f'] = data[13]
+    data_dict['p_f'] = data[14]
+    data_dict['imu_gx'] = data[15]
+    data_dict['imu_gy'] = data[16]
+    data_dict['imu_gz'] = data[17]
+    data_dict['imu_ax'] = data[18]
+    data_dict['imu_ay'] = data[19]
+    data_dict['imu_az'] = data[20]
     c.execute("""INSERT INTO Data (unix_timestamp, thumb_flex, index_flex, middle_flex, ring_flex, pinky_flex, thumb_cap,
                  index_cap_upper, index_cap_lower, index_cap_other, middle_cap_upper, middle_cap_lower,
                  ring_cap_upper, ring_cap_lower, pinky_cap_upper, pinky_cap_lower, imu_acc_x, imu_acc_y,
