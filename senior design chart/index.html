@@ -1,12 +1,31 @@
 <!DOCTYPE html>
-<html>
-	<head>
+<!-- saved from url=(0065)file:///C:/Users/antho/Desktop/senior%20design%20chart/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 		<title>Senior Design Chart</title>
-		<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-		<script type="text/javascript" src="js/Chart.js"></script>
-		<script type="text/javascript" src="js/script.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/Chart.js"></script>
+		<script type="text/javascript" src="./js/script.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/chartstyle.css">
 	</head>
 	<body>
-		<canvas id="myChart" width="400" height="400"></canvas>
+	
+		<div class="container">
+		
+			<h1 class="title">Senior Design Charts</h1>
+			
+			<!-- Flex Sensor Bar Chart -->
+			<div class="flex_chart">
+				<h2 class="title">Flex Sensor Readings</h2>
+				<canvas id="flexBarChart" width="400" height="400" style="width: 400px; height: 400px;"></canvas>
+			</div>
+			
+			<!-- IMU Radar Chart -->
+			<div class="imu_chart">
+				<h3 class="title">IMU Motion</h3>
+				<canvas id="imuRadarChart" width="400" height="400" style="width: 400px; height: 400px;"></canvas>
+			</div>
+			
+		</div>
+		
 	</body>
 </html>

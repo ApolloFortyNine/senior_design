@@ -1,0 +1,90 @@
+/*
+ * =======================
+ * === HTML BODY COLOR ===
+ * =======================
+ */
+ 
+body
+{
+	background-color: white;
+}
+
+/*
+ * =======================
+ * === CONTAINER COLOR ===
+ * =======================
+ * (This is within the html body.)
+ */
+ 
+div.container
+{
+	background-color: lightgrey;
+	width: 1000px;
+	margin: auto;
+	overflow: auto;
+}
+
+/* Container Title */ 
+h1.title
+{
+	color: rgb(16,37,63);
+	text-align: center;
+}
+
+/*
+ * =======================================
+ * === ALL THINGS PERTAINING TO CHARTS ===
+ * =======================================
+ */
+
+/* 
+ * --- Things Pertaining to Flex Sensor Chart ---
+ * ----------------------------------------------
+ */
+ 
+div.flex_chart
+{
+	background-color: darkgrey;
+	float: left;
+	width: 410px;
+	
+}
+
+/* Title */
+h2
+{
+	color: rgb(16,37,63);
+	text-align: center;
+}
+
+/* Background of Flex Sensor Chart */
+#flexBarChart
+{
+	background-color: white;
+}
+
+/*
+ * --- Things Pertaining to IMU Chart --- 
+ * --------------------------------------
+ */
+ 
+div.imu_chart
+{
+	background-color: darkgrey;
+	float: right;
+	width: 400px;
+	
+}
+
+/* Title */
+h3
+{
+	color: rgb(16,37,63);
+	text-align: center;
+}
+
+/* Background of IMU Chart */
+#imuRadarChart
+{
+	background-color: white;
+}	
