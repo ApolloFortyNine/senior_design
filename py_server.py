@@ -3,6 +3,8 @@ import json
 import sqlite3
 import logging
 import time
+from sklearn import tree
+import sqlite3
 from logging.handlers import TimedRotatingFileHandler
 
 # Logging setup
@@ -15,6 +17,19 @@ logger.addHandler(handler)
 
 
 def main():
+    conn = sqlite3.connect('glove.db3')
+    c = conn.cursor()
+
+    c.execute("""SELECT * FROM Data""")
+    results = c.fetchall()
+    data_arr = []
+    target_arr = []
+    for x in results:
+        data_arr.append(list(x[3:]))
+        target_arr.append(x[2])
+    # print(data_arr)
+    clf = tree.DecisionTreeClassifier()
+    clf.fit(data_arr, target_arr)
     # Socket creation
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     port = 5001
@@ -34,11 +49,15 @@ def main():
                 logger.debug("Received data: {0}".format(test_str))
                 data_dict = json.loads(test_str)
                 logger.info("Received valid data, sending to database")
-                fill_db(data_dict)
+                predict_letter(data_dict)
             client.close()
         except:
             logger.exception("Invalid data caused exception:")
             client.close()
+
+
+def predict_letter(data_dict):
+    print(clf.predict(data_dict_in['data']))
 
 
 def fill_db(data_dict_in):
