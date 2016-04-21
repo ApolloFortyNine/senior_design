@@ -8,24 +8,28 @@
 		<link rel="stylesheet" type="text/css" href="./css/chartstyle.css">
 	</head>
 	<body>
-	
-		<div class="container">
+		<div class="charts">		
 		
-			<h1 class="title">Senior Design Charts</h1>
+			<!-- Import Image for Title -->			
+			<img src="photos/BabbleLogo.png" alt="Babble Glove Logo">
 			
 			<!-- Flex Sensor Bar Chart -->
 			<div class="flex_chart">
 				<h2 class="title">Flex Sensor Readings</h2>
-				<canvas id="flexBarChart" width="400" height="400" style="width: 400px; height: 400px;"></canvas>
+				<canvas id="flexBarChart" width="300" height="300"></canvas>
+			</div>
+			
+			<!-- Show the Letter -->
+			<div class="show_letter">
+				<h2 class="title">Letter</h2>
+				<canvas id="receivedLetter" width="300" height="300"></canvas>
 			</div>
 			
 			<!-- IMU Radar Chart -->
 			<div class="imu_chart">
-				<h3 class="title">IMU Motion</h3>
-				<canvas id="imuRadarChart" width="400" height="400" style="width: 400px; height: 400px;"></canvas>
+				<h2 class="title">IMU Motion</h2>
+				<canvas id="imuRadarChart" width="300" height="300"></canvas>
 			</div>
-			
 		</div>
-		
 	</body>
 </html>

@@ -6,29 +6,33 @@
  
 body
 {
-	background-color: white;
+	background-color: lightgrey;
 }
 
 /*
  * =======================
  * === CONTAINER COLOR ===
  * =======================
- * (This is within the html body.)
  */
- 
-div.container
+
+div.charts
 {
+    border: 5px solid black;
 	background-color: lightgrey;
-	width: 1000px;
+	width: 1100px;
 	margin: auto;
 	overflow: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 /* Container Title */ 
-h1.title
+img
 {
-	color: rgb(16,37,63);
-	text-align: center;
+	width:1100px; 
+	height:107px;
 }
 
 /*
@@ -36,6 +40,15 @@ h1.title
  * === ALL THINGS PERTAINING TO CHARTS ===
  * =======================================
  */
+
+/* Chart Titles */
+h2
+{
+	color: rgb(16,37,63);
+	text-align: center;
+	font-family: "Times New Roman";
+    font-size: 30px;
+}
 
 /* 
  * --- Things Pertaining to Flex Sensor Chart ---
@@ -46,21 +59,39 @@ div.flex_chart
 {
 	background-color: darkgrey;
 	float: left;
-	width: 410px;
-	
-}
-
-/* Title */
-h2
-{
-	color: rgb(16,37,63);
-	text-align: center;
+	width: 300px;
+	margin-left: 50px;
+	margin-bottom: 30px;
 }
 
 /* Background of Flex Sensor Chart */
 #flexBarChart
 {
 	background-color: white;
+	width: 300px; 
+	height: 300px;
+}
+
+/*
+ * --- Things Pertaining to Showing Letter --- 
+ * -------------------------------------------
+ */
+
+div.show_letter
+{
+	background-color: darkgrey;
+	float: left;
+	width: 300px;
+	margin-left: 50px;
+	margin-bottom: 30px;
+}
+
+/* Background of Showing Letter */
+#flexBarChart
+{
+	background-color: white;
+	width: 300px; 
+	height: 300px;
 }
 
 /*
@@ -71,20 +102,16 @@ h2
 div.imu_chart
 {
 	background-color: darkgrey;
-	float: right;
-	width: 400px;
-	
-}
-
-/* Title */
-h3
-{
-	color: rgb(16,37,63);
-	text-align: center;
+	float: left;
+	width: 300px;
+	margin-left: 50px;
+	margin-bottom: 30px;
 }
 
 /* Background of IMU Chart */
 #imuRadarChart
 {
 	background-color: white;
+	width: 300px; 
+	height: 300px;
 }	
