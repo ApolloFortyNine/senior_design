@@ -4,6 +4,7 @@ import sqlite3
 import logging
 import time
 from sklearn import tree
+from sklearn import datasets, svm, metrics
 import sqlite3
 from logging.handlers import TimedRotatingFileHandler
 
@@ -28,6 +29,12 @@ def main():
         data_arr.append(list(x[3:]))
         target_arr.append(x[2])
     # print(data_arr)
+    svm1 = svm.SVC(gamma=0.1)
+    svm1.fit(data_arr, target_arr)
+    svm2 = svm.SVC(gamma=0.2)
+    svm2.fit(data_arr, target_arr)
+    svm3 = svm.SVC(gamma=0.05)
+    svm3.fit(data_arr, target_arr)
     clf1 = tree.DecisionTreeClassifier()
     clf1.fit(data_arr, target_arr)
     # Socket creation
@@ -49,16 +56,20 @@ def main():
                 logger.debug("Received data: {0}".format(test_str))
                 data_dict = json.loads(test_str)
                 logger.info("Received valid data, sending to database")
-                predict_letter(data_dict, clf1)
+                predict_letter(data_dict, clf1, svm1, svm2, svm3)
             client.close()
         except:
             logger.exception("Invalid data caused exception:")
             client.close()
 
 
-def predict_letter(data_dict, clf):
+def predict_letter(data_dict, clf, svm1, svm2, svm3):
     data = data_dict['data']
     prediction = clf.predict(data)[0]
+    print("Tree: " + prediction)
+    print("SVM .1: " + str(svm1.predict(data)))
+    print("SVM .2: " + str(svm2.predict(data)))
+    print("SVM .05: " + str(svm3.predict(data)))
     print(data_dict)
     conn = sqlite3.connect('tony.db3')
     c = conn.cursor()
