@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 import sqlite3
 app = Flask(__name__)
 
-@app.route("/tony", methods=['GET'])
+@app.route("/tony", methods=['GET', 'POST'])
 def tony():
     if request.headers['Content-Type'] == 'application/json':
         conn = sqlite3.connect('tony.db3')
