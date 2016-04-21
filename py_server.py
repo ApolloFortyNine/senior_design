@@ -57,7 +57,7 @@ def main():
 
 
 def predict_letter(data_dict, clf):
-    print(clf.predict(data_dict_in['data']))
+    print(clf.predict(data_dict['data']))
 
 
 def fill_db(data_dict_in):
