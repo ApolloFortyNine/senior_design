@@ -1,7 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 import sqlite3
 app = Flask(__name__)
 
+@app.after_request
+def apply_caching(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 @app.route("/tony", methods=['GET', 'POST'])
 def tony():
     if request.headers['Content-Type'] == 'application/json':
