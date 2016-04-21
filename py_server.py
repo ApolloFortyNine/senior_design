@@ -28,8 +28,8 @@ def main():
         data_arr.append(list(x[3:]))
         target_arr.append(x[2])
     # print(data_arr)
-    clf = tree.DecisionTreeClassifier()
-    clf.fit(data_arr, target_arr)
+    clf1 = tree.DecisionTreeClassifier()
+    clf1.fit(data_arr, target_arr)
     # Socket creation
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     port = 5001
@@ -49,14 +49,14 @@ def main():
                 logger.debug("Received data: {0}".format(test_str))
                 data_dict = json.loads(test_str)
                 logger.info("Received valid data, sending to database")
-                predict_letter(data_dict)
+                predict_letter(data_dict, clf1)
             client.close()
         except:
             logger.exception("Invalid data caused exception:")
             client.close()
 
 
-def predict_letter(data_dict):
+def predict_letter(data_dict, clf):
     print(clf.predict(data_dict_in['data']))
 
 
