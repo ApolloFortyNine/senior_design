@@ -57,7 +57,65 @@ def main():
 
 
 def predict_letter(data_dict, clf):
-    print(clf.predict(data_dict['data']))
+    data = data_dict['data']
+    prediction = clf.predict(data)[0]
+    print(data_dict)
+    conn = sqlite3.connect('tony.db3')
+    c = conn.cursor()
+    c.execute("DELETE FROM Data;")
+    conn.commit()
+    data_dict['t_f'] = data[0]
+    data_dict['i_f'] = data[1]
+    data_dict['m_f'] = data[2]
+    data_dict['r_f'] = data[3]
+    data_dict['p_f'] = data[4]
+    data_dict['t_c'] = data[5]
+    data_dict['i_cu'] = data[6]
+    data_dict['i_cl'] = data[7]
+    data_dict['i_co'] = data[8]
+    data_dict['m_cu'] = data[9]
+    data_dict['m_cl'] = data[10]
+    data_dict['r_cu'] = data[11]
+    data_dict['r_cl'] = data[12]
+    data_dict['p_cu'] = data[13]
+    data_dict['p_cl'] = data[14]
+    data_dict['imu_ax'] = data[15]
+    data_dict['imu_ay'] = data[16]
+    data_dict['imu_az'] = data[17]
+    data_dict['imu_gx'] = data[18]
+    data_dict['imu_gy'] = data[19]
+    data_dict['imu_gz'] = data[20]
+    c.execute("""INSERT INTO Data (unix_timestamp, thumb_flex, index_flex, middle_flex, ring_flex, pinky_flex, thumb_cap,
+                 index_cap_upper, index_cap_lower, index_cap_other, middle_cap_upper, middle_cap_lower,
+                 ring_cap_upper, ring_cap_lower, pinky_cap_upper, pinky_cap_lower, imu_acc_x, imu_acc_y,
+                 imu_acc_z, imu_gyro_x, imu_gyro_y, imu_gyro_z, letter)
+                 VALUES ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}, {12}, {13},
+                 {14}, {15}, {16}, {17}, {18}, {19}, {20}, {21}, '{22}')""".format(time.time(),
+                                                                           data_dict['t_f'],
+                                                                           data_dict['i_f'],
+                                                                           data_dict['m_f'],
+                                                                           data_dict['r_f'],
+                                                                           data_dict['p_f'],
+                                                                           data_dict['t_c'],
+                                                                           data_dict['i_cu'],
+                                                                           data_dict['i_cl'],
+                                                                           data_dict['i_co'],
+                                                                           data_dict['m_cu'],
+                                                                           data_dict['m_cl'],
+                                                                           data_dict['r_cu'],
+                                                                           data_dict['r_cl'],
+                                                                           data_dict['p_cu'],
+                                                                           data_dict['p_cl'],
+                                                                           data_dict['imu_ax'],
+                                                                           data_dict['imu_ay'],
+                                                                           data_dict['imu_az'],
+                                                                           data_dict['imu_gx'],
+                                                                           data_dict['imu_gy'],
+                                                                           data_dict['imu_gz'],
+                                                                           prediction))
+
+    conn.commit()
+    conn.close()
 
 
 def fill_db(data_dict_in):
