@@ -87,7 +87,7 @@ div.show_letter
 }
 
 /* Background of Showing Letter */
-#flexBarChart
+#receivedLetter
 {
 	background-color: white;
 	width: 300px; 

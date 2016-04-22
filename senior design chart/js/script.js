@@ -12,8 +12,8 @@ $(document).ready(function()
 		[
 			{
 				label: "Flex Sensors",
-				fillColor: "rgba(16,37,63,0.75)",
-				strokeColor: "rgba(16,37,63,0.75)",
+				fillColor: "rgba(16,37,63,1)",
+				strokeColor: "rgba(16,37,63,1)",
 				highlightFill: "rgba(46,107,180,0.75)",
 				highlightStroke: "rgba(46,107,180,0.75)",
 				data: [0, 0, 0, 0, 0],
@@ -39,8 +39,8 @@ $(document).ready(function()
 		[
 			{
 				label: "IMU Data",
-				fillColor: "rgba(16,37,63,0.75)",
-				strokeColor: "rgba(16,37,63,0.75)",
+				fillColor: "rgba(16,37,63,1)",
+				strokeColor: "rgba(16,37,63,1)",
 				highlightFill: "rgba(46,107,180,0.75)",
 				highlightStroke: "rgba(46,107,180,0.75)",
 				data: [0, 0, 0],
@@ -55,6 +55,24 @@ $(document).ready(function()
 	// Create the radar chart for the flex sensor
 	var imuChart = new Chart(ctx).Radar(imuData);
 			
+	// ========================================================
+	// Letter Received
+	// General Canvas
+	// ========================================================
+	
+	
+	// Get context of letter canvas
+	var canvas = document.getElementById("receivedLetter");
+	
+	// Create the canvas for the letter
+	var ctx = canvas.getContext("2d");
+	
+	// Style of the letter's canvas
+	ctx.fillStyle = "rgb(16,37,63)";
+	ctx.font = "300px Times New Roman";
+	ctx.textAlign = "center";
+	
+	
 	function randomUpdateData() 
 	{		
 		$.getJSON("http://192.227.175.138:5000/tony", function(data) 
@@ -81,12 +99,17 @@ $(document).ready(function()
 			imuChart.datasets[0].points[0].value = data["imu_acc_x"];
 			imuChart.datasets[0].points[1].value = data["imu_acc_y"];
 			imuChart.datasets[0].points[2].value = data["imu_acc_z"];
+			
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillText(data["letter"], canvas.width/2, canvas.height/2 + 100);
+
+
 		});
 				
 		flexChart.update();
 		imuChart.update();
 		
-		setTimeout(randomUpdateData, 2000);
+		setTimeout(randomUpdateData, 250);
 	}
 	randomUpdateData();
 });
