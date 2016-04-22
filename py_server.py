@@ -55,7 +55,7 @@ def main():
                     continue
                 logger.debug("Received data: {0}".format(test_str))
                 data_dict = json.loads(test_str)
-                logger.info("Received valid data, sending to database")
+                logger.info("Received valid data, sending to predicter")
                 predict_letter(data_dict, clf1, svm1, svm2, svm3)
             client.close()
         except:
