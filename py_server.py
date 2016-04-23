@@ -29,7 +29,7 @@ def main():
         data_arr.append(list(x[3:]))
         target_arr.append(x[2])
     # print(data_arr)
-    svm1 = svm.SVC(gamma=0.1)
+    svm1 = svm.SVC(gamma=0.01, C=4.65)
     svm1.fit(data_arr, target_arr)
     svm2 = svm.SVC(gamma=0.2)
     svm2.fit(data_arr, target_arr)
@@ -65,9 +65,10 @@ def main():
 
 def predict_letter(data_dict, clf, svm1, svm2, svm3):
     data = data_dict['data']
-    prediction = clf.predict(data)[0]
-    print("Tree: " + prediction)
-    print("SVM .1: " + str(svm1.predict(data)))
+    #prediction = clf.predict(data)[0]
+    prediction = svm1.predict(data)[0]
+    print("Tree: " + clf.predict(data)[0])
+    print("SVM G .01 C 4.65: " + str(svm1.predict(data)))
     print("SVM .2: " + str(svm2.predict(data)))
     print("SVM .05: " + str(svm3.predict(data)))
     print(data_dict)
