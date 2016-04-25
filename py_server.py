@@ -15,7 +15,7 @@ handler = TimedRotatingFileHandler(filename='sock.log', when='D', interval=1)
 log_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 handler.setFormatter(log_formatter)
 logger.addHandler(handler)
-
+last_letter = ""
 
 def main():
     conn = sqlite3.connect('glove.db3')
@@ -25,7 +25,6 @@ def main():
     results = c.fetchall()
     data_arr = []
     target_arr = []
-    last_letter = ""
     for x in results:
         data_arr.append(list(x[3:]))
         target_arr.append(x[2])
