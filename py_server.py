@@ -25,6 +25,7 @@ def main():
     results = c.fetchall()
     data_arr = []
     target_arr = []
+    last_letter = ""
     for x in results:
         data_arr.append(list(x[3:]))
         target_arr.append(x[2])
@@ -67,6 +68,9 @@ def predict_letter(data_dict, clf, svm1, svm2, svm3):
     data = data_dict['data']
     #prediction = clf.predict(data)[0]
     prediction = svm1.predict(data)[0]
+    if (prediction != last_letter):
+        last_letter = prediction
+        return
     print("Tree: " + clf.predict(data)[0])
     print("SVM G .01 C 4.65: " + str(svm1.predict(data)))
     print("SVM .2: " + str(svm2.predict(data)))
