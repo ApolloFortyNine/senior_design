@@ -17,6 +17,7 @@ handler.setFormatter(log_formatter)
 logger.addHandler(handler)
 last_letter = ""
 
+
 def main():
     conn = sqlite3.connect('glove.db3')
     c = conn.cursor()
@@ -67,6 +68,7 @@ def predict_letter(data_dict, clf, svm1, svm2, svm3):
     data = data_dict['data']
     #prediction = clf.predict(data)[0]
     prediction = svm1.predict(data)[0]
+    global last_letter
     if (prediction != last_letter):
         last_letter = prediction
         return
