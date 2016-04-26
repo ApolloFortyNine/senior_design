@@ -109,7 +109,7 @@ $(document).ready(function()
 		flexChart.update();
 		imuChart.update();
 		
-		setTimeout(randomUpdateData, 250);
+		setTimeout(randomUpdateData, 500);
 	}
 	randomUpdateData();
 });
